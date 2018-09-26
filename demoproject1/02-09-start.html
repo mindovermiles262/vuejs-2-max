@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title>VueJS with Maximilian</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <p>
+        <!-- This will not work as it will encode 'link' as a url parameter -->
+        <!-- {{ sayHello() }} - <a href="{{ link }}">Google</a> --> 
+
+        <!-- Instead, we need to use 'v-bind' directive: --> 
+        {{ sayHello() }} - <a v-bind:href="link">Google</a> 
+      </p>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          title: "Hello, title",
+          link: 'https://google.com',
+        },
+        methods: {
+          sayHello: function() {
+            <!-- return 'Hello!'; -->
+
+            <!-- console.log(this) --> <!-- Shows 'this' referes to sayHello  -->
+            return this.title; <!-- Would usually not work with 'this.' because 'this' referes to sayHello function -->
+          }
+        }
+      });
+    </script>
+  </body>
+
+</html>
