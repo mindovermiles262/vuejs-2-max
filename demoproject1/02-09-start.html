@@ -6,6 +6,8 @@
 
   <body>
     <div id="app">
+      <h1 v-once>{{ title }}</h1>
+
       <p>
         <!-- This will not work as it will encode 'link' as a url parameter -->
         <!-- {{ sayHello() }} - <a href="{{ link }}">Google</a> --> 
@@ -25,6 +27,13 @@
         methods: {
           sayHello: function() {
             <!-- return 'Hello!'; -->
+
+            /*  
+             * Without 'v-once' directive on <h1>, both <h1> and <p> would say 
+             *   "Hello sayHello()".
+             * With 'v-once' directive, <h1> = "Hello, title" and <p> = "Hello sayHello()" 
+            */
+            this.title = "Hello sayHello()"
 
             <!-- console.log(this) --> <!-- Shows 'this' referes to sayHello  -->
             return this.title; <!-- Would usually not work with 'this.' because 'this' referes to sayHello function -->
