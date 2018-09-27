@@ -7,18 +7,40 @@
 </head>
 <body>
   <div id="app">
-    <button v-on:click="increaseCount">Increase Counter</button>
-    <p>{{ counter }}</p>
+    <div class="wrapper" v-on:mousemove="updateCoordinates">
+      <button v-on:click="increaseCount(2, $event)">Increase Counter</button>
+      <p>{{ counter }}</p>
+
+      <p>
+        <!-- Using the 'methodNull' v-on function -->
+        <!-- Coordinates: {{ xCoordinate }} {{ yCoordinate }} <span v-on:mousemove="methodNull">DEAD SPOT</span> -->
+
+        <!-- Using Vue event-modifier (.stop) syntax -->
+        Coordinates: {{ xCoordinate }} / {{ yCoordinate }} <span v-on:mousemove.stop="">DEAD SPOT</span>
+      </p>
+
+    </div>
   </div>
+
   <script>
     new Vue({
       el: '#app',
       data: {
-        counter: 0
+        counter: 0,
+        xCoordinate: 0,
+        yCoordinate: 1
       },
       methods: {
-        increaseCount: function() {
-          this.counter++;
+        increaseCount: function(x, event) {
+          this.counter += x;
+          console.log(event)
+        },
+        updateCoordinates: function(event) {
+          this.xCoordinate = event.clientX;
+          this.yCoordinate = event.clientY;
+        },
+        methodNull: function(event) {
+          event.stopPropagation();
         }
       }
     });
