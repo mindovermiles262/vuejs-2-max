@@ -1,12 +1,15 @@
 <html>
   <head>
     <title>VueJS with Maximilian</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="../vue.js"></script>
   </head>
 
   <body>
     <div id="app">
+      <!-- Using v-once will output title="Hello, title" before sayHello() changes the value -->
       <h1 v-once>{{ title }}</h1>
+
+      <hr>
 
       <p>
         <!-- This will not work as it will encode 'link' as a url parameter -->
@@ -14,6 +17,15 @@
 
         <!-- Instead, we need to use 'v-bind' directive: --> 
         {{ sayHello() }} - <a v-bind:href="link">Google</a> 
+      </p>
+
+      <hr>
+
+      <p>
+        <!-- By default, Vue will render finishedLink as the text -->
+        {{ finishedLink }}
+        <!-- If you want to render the html of a var, use the v-html directive -->
+        <p v-html="finishedLink"></p>
       </p>
     </div>
 
@@ -23,11 +35,12 @@
         data: {
           title: "Hello, title",
           link: 'https://google.com',
+          finishedLink: '<a href="https://vuejs.org">VueJS</a>'
         },
         methods: {
           sayHello: function() {
             <!-- return 'Hello!'; -->
-
+            
             /*  
              * Without 'v-once' directive on <h1>, both <h1> and <p> would say 
              *   "Hello sayHello()".
@@ -42,5 +55,4 @@
       });
     </script>
   </body>
-
 </html>
