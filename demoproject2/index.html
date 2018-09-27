@@ -19,6 +19,11 @@
         Coordinates: {{ xCoordinate }} / {{ yCoordinate }} <span v-on:mousemove.stop="">DEAD SPOT</span>
       </p>
 
+      <!-- <input type="text" v-on:keyup="alertMe"> -->
+
+      <!-- Runs 'alertMe()' only when <Enter> or <Space> key pressed -->
+      <input type="text" v-on:keyup.enter.space="alertMe">
+
     </div>
   </div>
 
@@ -41,6 +46,9 @@
         },
         methodNull: function(event) {
           event.stopPropagation();
+        },
+        alertMe: function() {
+          alert('KeyUp')
         }
       }
     });
