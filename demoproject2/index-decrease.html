@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Demo Project 2 - Decrease</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button v-on:click="counter++">Increase Counter</button>
+      <button v-on:click="counter--">Decrease Counter</button>
+      <hr>
+      <button v-on:click="secondCounter++">Increase Second</button>
+      <p>{{ counter }}</p>
+      <p>{{ secondCounter }}</p>
+      <p>{{ result() }} | {{ computedOutput }}</p>
+    </div>
+
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          counter: 0,
+          secondCounter: 0
+        },
+        methods: {
+          result: function() {
+            console.log("Methods")
+            return this.counter > 5 ? "Greater than 5" : "Smaller than 5"
+          }
+        },
+        computed: {
+          /*
+           * Computed option is fired only when data:counter is changed. The
+           * above methods:result() fires every on every event
+           */
+          computedOutput: function() {
+            console.log("Computed")
+            return this.counter > 5 ? "Counter < 5" : "Counter > 5"
+          }
+        },
+        watch: {
+          /*
+           * The key 'counter' is a reference to data:counter
+           * The below function will fire after an event on data:counter
+           */
+          counter: function(value) {
+            var ths = this;
+            setTimeout(function() {
+              ths.counter = 0;
+            }, 2000);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
